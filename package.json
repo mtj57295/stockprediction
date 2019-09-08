@@ -1,0 +1,18 @@
+{
+  "name": "stocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.py",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "python server.py",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Joyce",
+  "license": "ISC",
+  "dependencies": {
+    "chartist": "^0.11.3",
+    "concurrently": "^4.1.2"
+  }
+}
