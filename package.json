@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.py",
   "scripts": {
-    "start": "npm run client",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "client": "npm start --prefix client",
     "server": "python server.py",
     "dev": "concurrently \"npm run server\" \"npm run client\""

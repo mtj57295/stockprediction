@@ -1,4 +1,4 @@
-import intrinio_sdk
+import intrinio-sdk
 from intrinio_sdk.rest import ApiException
 
 class Intrinio:
