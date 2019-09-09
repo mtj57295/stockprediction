@@ -4,10 +4,9 @@
   "description": "",
   "main": "server.py",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm start",
     "client": "npm start --prefix client",
-    "server": "python server.py",
-    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build" ,
+    "server": "python server.py"
   },
   "author": "Matthew Joyce",
   "license": "ISC",
