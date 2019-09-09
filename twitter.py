@@ -1,5 +1,5 @@
-.import tweepy
-.from textblob import TextBlob
+import tweepy
+from textblob import TextBlob
 import json
 
 class Twitter:
