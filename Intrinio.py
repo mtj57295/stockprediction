@@ -1,5 +1,5 @@
 #import intrinio_sdk
-from intrinio_sdk.rest import ApiException
+#from intrinio_sdk.rest import ApiException
 
 class Intrinio:
 
