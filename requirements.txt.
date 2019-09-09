@@ -25,7 +25,7 @@ get==2019.4.13
 graphics.py==5.0.1.post1
 gyp==0.1
 idna==2.8
-intrinio_sdk==4.0.0
+intrinio-sdk==4.0.0
 ipaddress==1.0.22
 ipykernel==4.10.1
 ipython==5.8.0
