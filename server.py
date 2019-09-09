@@ -1,5 +1,5 @@
 import sys
-sys.dont_write_bytecode = True
+#sys.dont_write_bytecode = True
 from Intrinio import Intrinio
 from twitter import Twitter
 from stock import Stock
