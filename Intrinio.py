@@ -11,7 +11,7 @@ class Intrinio:
         except ApiException as e:
           print("Exception when establishing connection with api: %s\r\n" % e)
 
-    def search_security_api(self, id, start_date, end_date, frequency='daily', page_size=100, next_page=''):
+    def search_security_api(self, id, start_date, end_date, frequency, page_size=100, next_page=''):
         try:
           return self.security_api.get_security_stock_prices(id, start_date=start_date, end_date=end_date,
                     frequency=frequency, page_size=page_size, next_page=next_page)

@@ -9,7 +9,7 @@ const initialState = {
    line: null,
    loading: true,
    company_ticker: '',
-   name: ''
+   name: '',
 }
 
 export default function(state = initialState, action) {
@@ -32,7 +32,7 @@ export default function(state = initialState, action) {
             x: null,
             y: null,
             line: null,
-            loading: false,
+            loading: true,
             company_ticker: '',
             name: ''
          }

@@ -1,11 +1,12 @@
 import sys
-#sys.dont_write_bytecode = True
+sys.dont_write_bytecode = True
 from Intrinio import Intrinio
 from twitter import Twitter
 from stock import Stock
 import os
 from flask import Flask, request, render_template, jsonify
 import json
+from dateutil.relativedelta import relativedelta
 from datetime import date, timedelta, datetime
 import copy
 
@@ -17,47 +18,67 @@ stock = Stock()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return jsonify({'msg': 'Server'})
 
-@app.route('/tweets')
+@app.route('/test')
+def test():
+    data =  intrinio.search_security_api('IBM', '1980-01-01', '2018-01-01', frequency='yearly')
+    print data
+    return jsonify({'data': data})
+
+@app.route('/tweets', methods= ['POST'])
 def tweets():
+    data = request.get_json()
+    print data
+    twitter.setQuery(data['company'])
+    twitter.setCount(1000)
+    tweets = twitter.search()
 
-        twitter.setQuery('Society')
-        twitter.setCount(1000)
-        tweets = twitter.search()
+    tweetArray = []
+    positive = 0
+    negative = 0
+    neutral = 0
+    subjectivityAvg = 0
 
-        tweetArray = []
-        positive = 0
-        negative = 0
-        neutral = 0
-        subjectivityAvg = 0
+    for tweet in tweets:
+        object = twitter.analysisTweet(tweet)
+        tweetArray.append(object)
+        subjectivityAvg += float(object['subjectivity'])
+        if object['polarity'] == 'Positive':
+            positive += 1
+        elif object['polarity'] == 'Negative':
+            negative += 1
+        else:
+            neutral += 1
 
-        for tweet in tweets:
-            object = twitter.analysisTweet(tweet)
-            tweetArray.append(object)
-            subjectivityAvg += float(object['subjectivity'])
-            if object['polarity'] == 'Positive':
-                positive += 1
-            elif object['polarity'] == 'Negative':
-                negative += 1
-            else:
-                neutral += 1
+    data = {
+        'tweets': tweetArray,
+        'count' : len(tweetArray),
+        'positive': positive,
+        'negative': negative,
+        'neutral': neutral,
+        'subjectivityAvg': subjectivityAvg / len(tweetArray)
+    }
 
-        data = {
-            'tweets': tweetArray,
-            'count' : len(tweetArray),
-            'positive': positive,
-            'negative': negative,
-            'neutral': neutral,
-            'subjectivityAvg': subjectivityAvg / len(tweetArray)
-        }
-
-        return jsonify({'data': data})
+    return jsonify({'data': data})
 
 @app.route('/stockprices', methods= ['POST'])
 def stock_prices():
+
     data1 = request.get_json()
-    data = intrinio.search_security_api(data1['company_ticker'], '2016-01-01', '2017-09-08',  page_size=365)
+    today = date.today()
+    startDate = None
+
+    if data1['frequency'] == 'daily':
+        startDate = today - timedelta(days=100)
+    elif data1['frequency'] == 'monthly':
+        startDate = today - relativedelta(months=100)
+    else:
+        startDate = today - relativedelta(years=100)
+
+    data = intrinio.search_security_api(data1['company_ticker'], startDate, today,
+    page_size=100, frequency=data1['frequency'])
+
     stock.fetch_data(data)
     fittedData = stock.fit_data()
 
@@ -101,6 +122,6 @@ def predictprices():
 
 
 if __name__ == '__main__':
-    app.run(host='calm-oasis-94316.herokuapp.com')
+    #app.run(host='calm-oasis-94316.herokuapp.com')
 
-    #app.run(host='0.0.0.0', port=os.environ.get('PORT', 5000), debug=True)
+    app.run(host='0.0.0.0', port=os.environ.get('PORT', 8000), debug=True)

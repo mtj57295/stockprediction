@@ -30,7 +30,7 @@ const PredictStock = ({ predictPrices, clearPrices, predictprices: { x, y, loadi
    return (
       <div>
          <h5 style={{display: 'inline-block', marginRight: '2%'}}>Make a Prediction:</h5>
-         <small>Select a date in the future, not from the above dates</small>
+         <small>Select a date in the future, works best for 100 days and less</small>
          <form action="/action_page.php">
            <p>Start Date: <input
              type="date"

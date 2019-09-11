@@ -20,7 +20,7 @@ class Stock:
         self.dates = []
         self.prices = []
         self.dates_format = []
-        self.svr_rbf = SVR(kernel= 'rbf', C= 1e3, gamma= 0.1)
+        self.svr_rbf = SVR(kernel= 'rbf', C= 1e3, gamma= 0.5)
         for stock in data.stock_prices:
             self.dates.append(stock.date)
             self.prices.append(stock.close)
@@ -37,13 +37,11 @@ class Stock:
         dates_format = self.dates_format
 
         dates_format = copy.deepcopy(dates)
-        dates.reverse()
-        prices.reverse()
 
         year = 0
         for i in range(len(dates)):
             if i == 0:
-                year = dates[i].year
+                year = dates[len(dates)-1].year
             dates[i] = self.to_value(dates[i], year)
 
         dates = np.reshape(dates, (len(dates), 1))

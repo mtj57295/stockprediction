@@ -5,7 +5,6 @@ const StockChart = ({x, y, l}) => {
 
    useEffect(() => {
       var ctx = document.getElementById('myChart').getContext('2d');
-
       var mixedChart = new Chart(ctx, {
          type: 'bar',
          data: {
@@ -48,9 +47,8 @@ const StockChart = ({x, y, l}) => {
 
    }, [0])
 
-
    return (
-      <div className='StockChart' style={{height: '50vh', width: '1000px'}} >
+      <div className='StockChart'>
          <canvas id="myChart"></canvas>
       </div>
    )

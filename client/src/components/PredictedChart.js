@@ -9,11 +9,11 @@ const PredictedChart = ({x, y}) => {
          type: 'line',
          data: {
             datasets: [{
-               label: 'SVM Model',
+               label: 'Predicted Model',
                data: y,
                fill: false,
-               backgroundColor: '#51d0de',
-               borderColor: '#51d0de'
+               backgroundColor: '#5ac18e',
+               borderColor: '#5ac18e'
             }],
 
             labels: x

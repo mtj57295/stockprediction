@@ -6,7 +6,7 @@ import {
 } from './types';
 
 
-export const updateStockData = (company_ticker) => async dispatch => {
+export const updateStockData = (company_ticker, frequency) => async dispatch => {
 
    const config = {
       headers: {
@@ -14,7 +14,7 @@ export const updateStockData = (company_ticker) => async dispatch => {
       }
    }
 
-   const body = JSON.stringify({company_ticker: company_ticker});
+   const body = JSON.stringify({company_ticker: company_ticker, frequency: frequency});
 
    try {
       const res = await axios.post('/stockprices', body, config);
