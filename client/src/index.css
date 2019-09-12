@@ -5,15 +5,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background-color: rgba(245,245,245,1);
-  height: 100%;
-  width: 100%;
+   background-image: url("./images/background3.jpg");
+   height: 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.big-container {
+   background-color: rgba(245,245,245, 0.95);
+   overflow: scroll;
+   width: 80%;
+   margin: 0 auto;
+   height: 100vh;
 }
 
 .center-container{
@@ -42,7 +46,7 @@ input[type=text] {
 .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #87CEEB;
+  background-color: #8B7B8B;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -163,8 +167,8 @@ h6 {
   padding: 8px 100px;
   transition: 0.3s;
   font-size: 22px;
-  background-color: #f122;
-  border: solid 1px #f129;
+  background-color: #A262;
+  border: solid 1px #8B7B8B;
 }
 
 /* Change background color of buttons on hover */
@@ -181,8 +185,8 @@ h6 {
 .tabcontent {
   display: none;
   padding: 6px 12px;
-  -webkit-animation: fadeEffect 1s;
-  animation: fadeEffect 1s;
+  -webkit-animation: fadeEffect 2.5s;
+  animation: fadeEffect 2.5s;
 }
 
 /* Fade in tabs */

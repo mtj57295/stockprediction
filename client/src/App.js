@@ -9,13 +9,15 @@ import store from './store';
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-         <Fragment>
-            <Route exact path='/' component={Landing}/>
-         </Fragment>
-      </Router>
-   </Provider>
+    <div className='big-container'>
+       <Provider store={store}>
+         <Router>
+            <Fragment>
+               <Route exact path='/' component={Landing}/>
+            </Fragment>
+         </Router>
+      </Provider>
+   </div>
   );
 }
 
