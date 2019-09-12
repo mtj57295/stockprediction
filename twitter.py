@@ -28,6 +28,18 @@ class Twitter:
         except tweepy.TweepError as e:
             print("Error : " + str(e))
 
+    def search_company_news(self, company):
+        try:
+            response = self.api.user_timeline(screen_name = 'ibm', count = 100)
+            time_line = []
+            for i in response:
+                tweet_info = {'created_at': i.created_at, 'text': i.text,
+                'url': 'https://twitter.com/' + i.user.name + '/status/' + i.id_str}
+                time_line.append(tweet_info)
+            return time_line
+        except:
+            print('Error: search_company_api')
+
     def setQuery(self, query):
         self.query = query
 
@@ -35,10 +47,12 @@ class Twitter:
         self.count = count
 
     def analysisTweet(self, tweet):
-            analysis = TextBlob(tweet.text)
-            return {'tweet': ''.join([x for x in tweet.text if ord(x) < 128]),
-                    'polarity': self.getStatusOnPolarity(analysis.sentiment.polarity),
-                    'subjectivity': analysis.sentiment.subjectivity}
+        print tweet
+        analysis = TextBlob(tweet.text)
+        return {'tweet': ''.join([x for x in tweet.text if ord(x) < 128]),
+                'url': 'https://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str,
+                'polarity': self.getStatusOnPolarity(analysis.sentiment.polarity),
+                'subjectivity': analysis.sentiment.subjectivity}
 
     def getStatusOnPolarity(self, polarity):
         if polarity > 0:

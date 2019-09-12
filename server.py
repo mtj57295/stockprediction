@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 from datetime import date, timedelta, datetime
 import copy
 
+
 app = Flask(__name__)
 
 intrinio = Intrinio()
@@ -18,20 +19,14 @@ stock = Stock()
 
 @app.route('/')
 def index():
-    return jsonify({'msg': 'Server'})
-
-@app.route('/test')
-def test():
-    data =  intrinio.search_security_api('IBM', '1980-01-01', '2018-01-01', frequency='yearly')
-    print data
+    data = twitter.search_company_news('IBM')
     return jsonify({'data': data})
 
 @app.route('/tweets', methods= ['POST'])
 def tweets():
     data = request.get_json()
-    print data
     twitter.setQuery(data['company'])
-    twitter.setCount(1000)
+    twitter.setCount(100)
     tweets = twitter.search()
 
     tweetArray = []
@@ -90,7 +85,7 @@ def stock_prices():
     return jsonify({'data': data})
 
 @app.route('/findCompanies', methods= ['POST'])
-def findCompanies():
+def find_companies():
     data = request.get_json()
     companies = intrinio.search_company_api(data['company'])
     if len(companies.companies) != 0:
@@ -102,7 +97,7 @@ def findCompanies():
     return jsonify({'data': 'None'})
 
 @app.route('/predictprices', methods= ['POST'])
-def predictprices():
+def predict_prices():
     data = request.get_json()
     startDate = datetime.strptime(data['startDate'], '%Y-%m-%d')
     endDate = datetime.strptime(data['endDate'], '%Y-%m-%d')
@@ -118,6 +113,12 @@ def predictprices():
         'dates': dates_format
     }
 
+    return jsonify({'data': data})
+
+@app.route('/companynews', methods= ['POST'])
+def company_news():
+    data = request.get_json()
+    data = twitter.search_company_news(data['company'])
     return jsonify({'data': data})
 
 

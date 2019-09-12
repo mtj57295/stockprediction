@@ -6,6 +6,7 @@ import { findCompanies, clearCompanies } from '../actions/findcompanies';
 import StockChart from './StockChart';
 import StockResults from './StockResults';
 import TwitterResults from './TwitterResults';
+import CompanyNews from './CompanyNews';
 
 const Landing = ({findCompanies, findcompanies: {companyTicker, loadingCompanies}}) => {
 
@@ -72,8 +73,11 @@ const Landing = ({findCompanies, findcompanies: {companyTicker, loadingCompanies
                <div style={{ display: stocks }} id="stocks" className="tabcontent">
                   <StockResults companyTicker={companyTicker}/>
                </div>
-               <div style={{ display: twitter }} id="Paris" className="tabcontent">
+               <div style={{ display: twitter }} id="twitter" className="tabcontent">
                   <TwitterResults company={company2}/>
+               </div>
+               <div style={{ display: news }} id="news" className="tabcontent">
+                  <CompanyNews company={companyTicker}/>
                </div>
             </div>
          ) : (<div></div>)}

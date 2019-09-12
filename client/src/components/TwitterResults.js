@@ -22,7 +22,7 @@ const TwitterResults = ({ company, clearTwitterResults, updateTwitterResults, tw
             <TwitterChart count={count} negative={negative} neutral={neutral} positive={positive}/>
          ) :
          (<div></div>)}
-         {!loading && tweets != null ? (<TwitterPostings tweets={tweets}/>) : (<div></div>)}
+         {!loading && tweets != null ? (<TwitterPostings tweets={tweets} type='feed'/>) : (<div></div>)}
       </div>
    )
 }
